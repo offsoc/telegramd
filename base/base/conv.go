@@ -19,16 +19,29 @@ package base
 
 import (
 	"strconv"
+	"math"
 )
 
 func StringToInt32(s string) (int32, error) {
-	i, err := strconv.Atoi(s)
-	return int32(i), err
+	i, err := strconv.ParseInt(s, 10, 32)
+	if err != nil {
+		return 0, err
+	}
+	if i < math.MinInt32 || i > math.MaxInt32 {
+		return 0, strconv.ErrRange
+	}
+	return int32(i), nil
 }
 
 func StringToUint32(s string) (uint32, error) {
-	i, err := strconv.Atoi(s)
-	return uint32(i), err
+	i, err := strconv.ParseUint(s, 10, 32)
+	if err != nil {
+		return 0, err
+	}
+	if i > math.MaxUint32 {
+		return 0, strconv.ErrRange
+	}
+	return uint32(i), nil
 }
 
 func StringToInt64(s string) (int64, error) {
