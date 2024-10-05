@@ -27,8 +27,11 @@ func StringToInt32(s string) (int32, error) {
 }
 
 func StringToUint32(s string) (uint32, error) {
-	i, err := strconv.Atoi(s)
-	return uint32(i), err
+	i, err := strconv.ParseUint(s, 10, 32)
+	if err != nil {
+		return 0, err
+	}
+	return uint32(i), nil
 }
 
 func StringToInt64(s string) (int64, error) {
