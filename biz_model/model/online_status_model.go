@@ -187,7 +187,7 @@ func (s *onlineStatusModel) getOnline(conn redis.Conn, userId int32) (statusList
 
 		if time.Now().Unix() < status.Now + CHECK_ONLINE_TIMEOUT {
 			statusList = append(statusList, status)
-			fmt.Println(status)
+			fmt.Printf("User %d is online.\n", status.UserId)
 		}
 	}
 	return
